@@ -1,0 +1,17 @@
+<div class="message">
+  <div class="row">
+    <div class="col-md-8"><h4>{{ message.host }}</h4></div>
+    <div class="col-md-4">
+      <app-message-menu [message]=message></app-message-menu>
+    </div>
+  </div>
+  
+  <span class="created">{{ message.created }}</span><br/>
+  <div *ngIf="message.text.length > 200 else smallText">
+      <p *ngIf="isCutted else fullTextBlock">{{ message.text | textCutting }}<button class="btn btn-link" (click)="cutText()">докладніше</button></p>
+      <ng-template #fullTextBlock>{{ message.text }}<button class="btn btn-link" (click)="cutText()">сховати</button></ng-template>
+  </div>
+  <ng-template #smallText>
+      {{ message.text }}
+  </ng-template>
+</div>

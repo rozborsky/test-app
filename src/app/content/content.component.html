@@ -1,0 +1,8 @@
+<div class="container">
+  <app-message-form></app-message-form>
+  
+  <div *ngIf="massages.length == 0" >
+    на стіні немає жодного запису. Ви можете бути першим
+  </div>
+  <app-message *ngFor="let message of massages" [message] = message >{{message.host}}</app-message> 
+</div>

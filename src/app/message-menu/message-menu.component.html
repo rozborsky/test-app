@@ -1,0 +1,51 @@
+<span class="glyphicon glyphicon-chevron-down pull-right" (click)="showMenu()"></span><br/>
+<div *ngIf="isMenuOpened">
+    <div class="post-menu pull-right">
+        <div>
+            <button class="btn btn-link" (click)="updateText.open(); hideMenu()">редагувати</button>
+        </div>
+        <div>
+            <button class="btn btn-link" (click)="confirmDelete.open(); hideMenu()">видалити</button>
+        </div>
+    </div>
+</div>
+
+<modal #confirmDelete
+    title="Видалити повідомлення"
+    modalClass="modal-sm"
+    [hideCloseButton]="true"
+    [closeOnEscape]="true"
+    [closeOnOutsideClick]="true"
+    (onSubmit)="deleteMessage(); confirmDelete.close()">
+    
+    <modal-content>
+        Повідомлення буде видалено і ви не зможете більше його знайти. Також ви можете редагувати повідомлення, якщо ви хочете щось змінити.  
+    </modal-content>
+    
+    <modal-footer>
+        <button class="btn btn-primary" (click)="confirmDelete.close()">close</button>
+        <button class="btn btn-primary" (click)="updateText.open(); confirmDelete.close()">редагувати</button>
+        <button class="btn btn-primary" (click)="deleteMessage(); confirmDelete.close()">видалити</button>
+    </modal-footer>
+</modal>
+
+<modal #updateText
+    class="d"
+    title="редагувати повідомлення"
+    modalClass="modal-lg"
+    [hideCloseButton]="false"
+    [closeOnEscape]="true"
+    [closeOnOutsideClick]="true">
+
+    <modal-content>
+        <div class="updatedMessage">
+            <form #myForm="ngForm" (ngSubmit)="updateMessage(); updateText.close()">
+                <div class="form-group">
+                    <textarea class="form-control" id="text" value="{{ message.text }}" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">редагувати</button>
+            </form>
+        </div>
+        
+    </modal-content>
+</modal>
