@@ -13,11 +13,11 @@ import { Message } from '../message';
   providers: [ HttpService ]
 })
 export class ContentComponent implements OnInit {
-  messages: Message[] = [];
+  messages: Message[]=[];
   
   constructor(private httpService: HttpService){}
   
   ngOnInit(){
-     this.httpService.getMessages().subscribe((data: Response) => this.messages=data.json());
+    this.httpService.getMessages().subscribe((data: Response) => this.messages=data.json());
   }
 }
