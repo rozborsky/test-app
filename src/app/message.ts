@@ -2,6 +2,6 @@ export class Message {
   id: number;
   host: string;
   code: number;
-  text: string;
+  message: string;
   created: string;
 }

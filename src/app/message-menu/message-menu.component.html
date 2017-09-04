@@ -41,7 +41,7 @@
         <div class="updatedMessage">
             <form #myForm="ngForm" (ngSubmit)="updateMessage(); updateText.close()">
                 <div class="form-group">
-                    <textarea class="form-control" id="text" value="{{ message.text }}" required></textarea>
+                    <textarea class="form-control" id="text" value="{{ message.message }}" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right">редагувати</button>
             </form>
