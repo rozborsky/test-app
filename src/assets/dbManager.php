@@ -1,6 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: *"); 
-    header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE");
+    header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization");
 
     const HOST = 'localhost';
     const DATABASE = 'test';
@@ -9,18 +10,24 @@
     const TABLENAME = 'reports';
 
     $pdo;
-
+    
     try {
         $pdo = new PDO('mysql:dbname=test;host='.HOST, USER, PASSWORD);
         if(!table_exists($pdo, TABLENAME)) {
             create_table($pdo, TABLENAME);                
-        }
-
-        echo json_encode(get_messages($pdo));
+        }   
     } catch (PDOException $e) {
-        
         echo 'Сервіс недоступний';
-    } 
+    }
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        echo json_encode(get_messages($pdo));
+
+    } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $message = json_decode(file_get_contents('php://input'), true);
+        add_message($pdo, $message['host'], $message['code'], $message['message']);
+    }
 
 
     function table_exists($pdo, $table) {
@@ -53,6 +60,13 @@
         $sth->execute();
 
         return $sth->fetchAll(PDO::FETCH_BOTH);
+    }
+
+
+    function add_message($pdo, $host, $code, $message) {
+        $statement = $pdo->prepare("INSERT INTO reports (host, code, message) VALUES (:host, :code, :message)");
+        $statement->execute([
+            ':host'=> $host, ':code'=> $code, ':message'=> $message]);
     }
 
 
