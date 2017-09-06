@@ -3,11 +3,7 @@
     header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS");
     header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization");
 
-    const HOST = 'localhost';
-    const DATABASE = 'test';
-    const USER = 'admin';
-    const PASSWORD = 'password';
-    const TABLENAME = 'reports';
+    include 'dbParameters.php';
 
     $pdo;
     
