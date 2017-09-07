@@ -12,3 +12,7 @@ h4{
     color: #90949c;
 }
 
+.text{
+    word-wrap:break-word;
+}
+

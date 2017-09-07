@@ -7,7 +7,7 @@
   </div>
   
   <span class="created">{{ message.created }}</span><br/>
-  <div *ngIf="message.message.length > 200 else smallText">
+  <div *ngIf="message.message.length > 200 else smallText" class="text">
       <p *ngIf="isCutted else fullTextBlock">{{ message.message | textCutting }}<button class="btn btn-link" (click)="cutText()">докладніше</button></p>
       <ng-template #fullTextBlock>{{ message.message }}<button class="btn btn-link" (click)="cutText()">сховати</button></ng-template>
   </div>
