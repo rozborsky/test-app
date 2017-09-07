@@ -25,8 +25,8 @@ export class HttpService{
                        .catch((error:any) =>{return Observable.throw(error);}); 
     }
 
-    deleteMessage() {
-        return this.http.delete('http://localhost/test/test-Angular-PHP/src/assets/dbManagerDelete.php').map((res:Response) => res.json());
+    deleteMessage(id: string) {
+        return this.http.delete(this.PHP_SCRIPT_URL +'/' + id).map((res:Response) => res.json());
         
     }
 }

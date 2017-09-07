@@ -40,6 +40,6 @@ export class MessageMenuComponent {
 
   deleteMessage(message: Message) {
     console.log("delete");
-    this.httpService.deleteMessage().subscribe(result => console.log(result));
+    this.httpService.deleteMessage(message.id + "").subscribe(result => console.log(result));
   }
 }

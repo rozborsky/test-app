@@ -19,10 +19,15 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo json_encode(get_messages($pdo));
-
     } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = json_decode(file_get_contents('php://input'), true);
         add_message($pdo, $message['host'], $message['code'], $message['message']);
+    } elseif ($_SERVER["REQUEST_METHOD"] == "PUT") {
+        
+    } elseif ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+        $url_parts = explode ( '.php/', $_SERVER[ 'REQUEST_URI' ]);
+        // header('Location: http://www.ccm.net/forum/'.$url_parts[1]); 
+        delete_message($pdo, $url_parts[1]);
     }
 
 
@@ -66,6 +71,32 @@
     }
 
 
+    function delete_message($pdo, $id) {
+        $sth = $pdo->prepare("DELETE FROM reports WHERE id = :id"); 
+        $sth->execute([
+            ':id' => $id
+        ]);
+        return $sth->fetchAll(PDO::FETCH_BOTH );
+    }
+
+
+    // function get_message($id) {
+    //     $sth = $pdo->prepare("SELECT * FROM reports WHERE id = :id LIMIT 1");
+    //     $sth->execute([
+    //         ':id' => $id
+    //     ]);
+    //     return $sth->fetch();
+    // }
+    
+    // function update_message($id) {
+    //     $sth = $pdo->prepare("SELECT * FROM reports WHERE id = :id'");
+    //     $sth->execute([
+    //         ':id' => $id
+    //     ]);
+    //     return $sth->fetchAll(PDO::FETCH_BOTH );
+    // }
+    
+    
     // echo json_encode(
     //     array( 
     //         array( 
