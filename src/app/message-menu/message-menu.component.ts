@@ -35,15 +35,12 @@ export class MessageMenuComponent {
   }
 
   updateMessage(message: Message) {
-    this.httpService.updateMessage(message).subscribe(
-      data => {
-        this.message;
-        return true;
-      }
-   );
+    this.httpService.updateMessage(message).subscribe();
+    location.reload();
   }
 
   deleteMessage(message: Message) {
     this.httpService.deleteMessage(message.id + "").subscribe();
+    location.reload();
   }
 }

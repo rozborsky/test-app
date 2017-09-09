@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../http.service';
 
 import { Message } from '../message';
@@ -10,9 +10,8 @@ import { Message } from '../message';
   providers: [ HttpService ]
 })
 export class MessageFormComponent implements OnInit {
-
   message: Message;
-
+ 
   constructor(private httpService: HttpService) { 
     this.message = new Message;
     this.message.id = 1;
@@ -24,5 +23,6 @@ export class MessageFormComponent implements OnInit {
 
   addMessage(message: Message): void {
     this.httpService.addMessage(this.message).subscribe();
+    location.reload();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Response } from '@angular/http';
 import { HttpService } from '../http.service';
@@ -13,9 +13,9 @@ import { MessageFormComponent } from '../message-form/message-form.component';
   styleUrls: ['./content.component.css'],
   providers: [ HttpService ]
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit{
   messages: Message[]=[];
-  
+
   constructor(private httpService: HttpService){}
   
   ngOnInit(){

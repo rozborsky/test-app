@@ -19,7 +19,7 @@ export class HttpService{
     addMessage(message: Message) {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
-        console.log(body);
+
         return this.http.post(this.PHP_SCRIPT_URL, body, { headers: headers })
             .map((resp:Response) => resp.json())
             .catch((error:any) => {return Observable.throw(error);}); 
@@ -32,8 +32,7 @@ export class HttpService{
     updateMessage(message: Message) {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
-        console.log(body);
-        return this.http.put(this.PHP_SCRIPT_URL, body, { headers: headers } );//.map((res: Response) => res.json())
-            // .catch((error:any) => {return Observable.throw(error);});
+
+        return this.http.put(this.PHP_SCRIPT_URL, body, { headers: headers } );
     }
 }
