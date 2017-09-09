@@ -30,7 +30,6 @@
 </modal>
 
 <modal #updateText
-    class="d"
     title="редагувати повідомлення"
     modalClass="modal-lg"
     [hideCloseButton]="false"
@@ -39,9 +38,9 @@
 
     <modal-content>
         <div class="updatedMessage">
-            <form #myForm="ngForm" (ngSubmit)="updateMessage(); updateText.close()">
+            <form #myForm="ngForm" (ngSubmit)="updateMessage(message); updateText.close()">
                 <div class="form-group">
-                    <textarea class="form-control" id="text" value="{{ message.message }}" required></textarea>
+                    <textarea class="form-control" id="text" value="{{ message.message }}" name="message" [(ngModel)]="message.message"  required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right">редагувати</button>
             </form>

@@ -7,6 +7,7 @@ import { Message } from '../message';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent {
+  
   @Input() message: Message;
   isCutted: boolean = true;
   isMenuOpen: boolean = false;

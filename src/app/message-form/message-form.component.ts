@@ -10,8 +10,8 @@ import { Message } from '../message';
   providers: [ HttpService ]
 })
 export class MessageFormComponent implements OnInit {
+
   message: Message;
-  currentTime: number = Date.now();
 
   constructor(private httpService: HttpService) { 
     this.message = new Message;

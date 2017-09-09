@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 import { HttpService } from '../http.service';
 
 import { Message } from '../message';
+import { MessageFormComponent } from '../message-form/message-form.component';
 
 
 @Component({

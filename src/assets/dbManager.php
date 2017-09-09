@@ -19,14 +19,17 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo json_encode(get_messages($pdo));
+
     } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = json_decode(file_get_contents('php://input'), true);
         add_message($pdo, $message['host'], $message['code'], $message['message']);
+
     } elseif ($_SERVER["REQUEST_METHOD"] == "PUT") {
-        
+        $message = json_decode(file_get_contents('php://input'), true);
+        update_message($pdo, $message['id'], $message['message']);
+
     } elseif ($_SERVER["REQUEST_METHOD"] == "DELETE") {
         $url_parts = explode ( '.php/', $_SERVER[ 'REQUEST_URI' ]);
-        // header('Location: http://www.ccm.net/forum/'.$url_parts[1]); 
         delete_message($pdo, $url_parts[1]);
     }
 
@@ -57,104 +60,33 @@
 
 
     function get_messages($pdo) {
-        $sth = $pdo->prepare("SELECT * FROM reports");
-        $sth->execute();
+        $statement = $pdo->prepare("SELECT * FROM reports");
+        $statement->execute();
 
-        return $sth->fetchAll(PDO::FETCH_BOTH);
+        return $statement->fetchAll(PDO::FETCH_BOTH);
     }
 
 
     function add_message($pdo, $host, $code, $message) {
         $statement = $pdo->prepare("INSERT INTO reports (host, code, message) VALUES (:host, :code, :message)");
         $statement->execute([
-            ':host'=> $host, ':code'=> $code, ':message'=> $message]);
+            ':host'=> $host, ':code'=> $code, ':message'=> $message
+        ]);
     }
 
 
     function delete_message($pdo, $id) {
-        $sth = $pdo->prepare("DELETE FROM reports WHERE id = :id"); 
-        $sth->execute([
+        $statement = $pdo->prepare("DELETE FROM reports WHERE id = :id"); 
+        $statement->execute([
             ':id' => $id
         ]);
-        return $sth->fetchAll(PDO::FETCH_BOTH );
     }
 
 
-    // function get_message($id) {
-    //     $sth = $pdo->prepare("SELECT * FROM reports WHERE id = :id LIMIT 1");
-    //     $sth->execute([
-    //         ':id' => $id
-    //     ]);
-    //     return $sth->fetch();
-    // }
-    
-    // function update_message($id) {
-    //     $sth = $pdo->prepare("SELECT * FROM reports WHERE id = :id'");
-    //     $sth->execute([
-    //         ':id' => $id
-    //     ]);
-    //     return $sth->fetchAll(PDO::FETCH_BOTH );
-    // }
-    
-    
-    // echo json_encode(
-    //     array( 
-    //         array( 
-    //             "id" => 11, 
-    //             "host" => "Mr. Nice", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "1111"
-    //         ),
-    //         array( 
-    //             "id" => 12, 
-    //             "host" => "Mr. Narco", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "4444"
-    //         ),
-    //         array( 
-    //             "id" => 13, 
-    //             "host" => "Mr. Nice", 
-    //             "code" => 55, 
-    //             "text" => "message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1", 
-    //             "created" => "44444444"
-    //         ),
-    //         array( 
-    //             "id" => 14, 
-    //             "host" => "Mr. Narco", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "444555555"
-    //         ),
-    //         array( 
-    //             "id" => 15, 
-    //             "host" => "Mr. Nice", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "66666666666666"
-    //         ),
-    //         array( 
-    //             "id" => 16, 
-    //             "host" => "Mr. Narco", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "777777777777"
-    //         ),
-    //         array( 
-    //             "id" => 17, 
-    //             "host" => "Mr. Narco", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "88888888888"
-    //         ),
-    //         array( 
-    //             "id" => 18, 
-    //             "host" => "Mr. Nice", 
-    //             "code" => 55, 
-    //             "text" => "message1", 
-    //             "created" => "9999999999"
-    //         )
-    //     )
-    // );
+    function update_message($pdo, $id, $message) {
+        $statement = $pdo->prepare("UPDATE reports SET message = :message WHERE id = :id");
+        $statement->execute([
+            ':id' => $id, ':message' => $message
+        ]);
+    }
 ?>

@@ -34,12 +34,16 @@ export class MessageMenuComponent {
     this.isMenuOpened = false;
   }
 
-  updateMessage() {
-
+  updateMessage(message: Message) {
+    this.httpService.updateMessage(message).subscribe(
+      data => {
+        this.message;
+        return true;
+      }
+   );
   }
 
   deleteMessage(message: Message) {
-    console.log("delete");
-    this.httpService.deleteMessage(message.id + "").subscribe(result => console.log(result));
+    this.httpService.deleteMessage(message.id + "").subscribe();
   }
 }
