@@ -18,7 +18,11 @@ export class ContentComponent implements OnInit{
 
   constructor(private httpService: HttpService){}
   
-  ngOnInit(){
+  ngOnInit() {
+    this.getMessages();
+  }
+
+  getMessages() {
     this.httpService.getMessages().subscribe((data: Response) => this.messages=data.json());
   }
 }

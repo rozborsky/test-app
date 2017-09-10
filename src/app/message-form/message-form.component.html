@@ -1,17 +1,23 @@
 <div class="container">
   <div class="row">
-    <form  (submit)="addMessage(message)">
+    <form #form="ngForm" (submit)="addMessage(message)">
       <div class="form-group">
         <input 
-          id="name" 
-          name="message"                
+          #text="ngModel"        
+          id="text"
+          name="text"                
           type="text" 
           class="form-control input-lg" 
           placeholder="Що в вас на думці?"
           [(ngModel)]="message.message" 
-          required> 
+          required minlength="2">
+          <div class="alert alert-danger" *ngIf="text.touched && !form.valid">
+            Повідомлення занадто коротке
+          </div>
       </div>
-      <button class="btn btn-primary pull-right" type="sumbit">додати</button>
+      <div class="form-group">
+          <button [disabled]="form.invalid" class="btn btn-primary pull-right" type="sumbit">додати</button>
+      </div>
     </form>
   </div>
 </div>
