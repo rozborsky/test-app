@@ -5,13 +5,12 @@
       <app-message-menu [message]=message></app-message-menu>
     </div>
   </div>
-  
   <span class="created">{{ message.created }}</span><br/>
-  <div *ngIf="message.message.length > 200 else smallText" class="text">
-      <p *ngIf="isCutted else fullTextBlock">{{ message.message | textCutting }}<button class="btn btn-link" (click)="cutText()">докладніше</button></p>
-      <ng-template #fullTextBlock>{{ message.message }}<button class="btn btn-link" (click)="cutText()">сховати</button></ng-template>
+  <div *ngIf="text_of_message.length > 200 else smallText" class="text">
+      <p *ngIf="isCutted else fullTextBlock">{{ text_of_message | textCutting }}<button class="btn btn-link" (click)="cutText()">докладніше</button></p>
+      <ng-template #fullTextBlock>{{ text_of_message }}<button class="btn btn-link" (click)="cutText()">сховати</button></ng-template>
   </div>
   <ng-template #smallText>
-      {{ message.message }}
+      {{ text_of_message }}
   </ng-template>
 </div>

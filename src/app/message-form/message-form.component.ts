@@ -9,9 +9,9 @@ import { Message } from '../message';
   styleUrls: ['./message-form.component.css'],
   providers: [ HttpService ]
 })
-export class MessageFormComponent implements OnInit {
+export class MessageFormComponent {
   message: Message;
- 
+
   constructor(private httpService: HttpService) { 
     this.message = new Message;
     this.message.id = 1;
@@ -19,8 +19,6 @@ export class MessageFormComponent implements OnInit {
     this.message.code = 2222;
   }
   
-  ngOnInit() {}
-
   addMessage(message: Message): void {
     this.httpService.addMessage(this.message).subscribe();
     location.reload();
