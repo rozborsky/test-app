@@ -8,9 +8,10 @@ import { MessageFormComponent } from '../message-form/message-form.component';
 
 
 @Component({
+  moduleId: module.id,
   selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css'],
+  templateUrl: 'content.component.html',
+  styleUrls: ['content.component.css'],
   providers: [ HttpService ]
 })
 export class ContentComponent implements OnInit{
@@ -21,7 +22,7 @@ export class ContentComponent implements OnInit{
   ngOnInit() {
     this.getMessages();
   }
-
+  
   getMessages() {
     this.httpService.getMessages().subscribe((data: Response) => this.messages=data.json());
   }

@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpService } from '../http.service';
 
 import { Message } from '../message';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-message-form',
-  templateUrl: './message-form.component.html',
-  styleUrls: ['./message-form.component.css'],
+  templateUrl: 'message-form.component.html',
+  styleUrls: ['message-form.component.css'],
   providers: [ HttpService ]
 })
 export class MessageFormComponent {

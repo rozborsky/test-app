@@ -5,9 +5,10 @@ import { Message } from '../message';
 import { HttpService } from '../http.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-message-menu',
-  templateUrl: './message-menu.component.html',
-  styleUrls: ['./message-menu.component.css'],
+  templateUrl: 'message-menu.component.html',
+  styleUrls: ['message-menu.component.css'],
   host: {
     '(document:click)': 'onClick($event)',
   }

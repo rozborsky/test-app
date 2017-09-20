@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Message } from '../message';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  templateUrl: 'message.component.html',
+  styleUrls: ['message.component.css']
 })
 export class MessageComponent {
   

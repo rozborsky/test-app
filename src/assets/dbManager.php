@@ -63,7 +63,7 @@
         $statement = $pdo->prepare("SELECT * FROM reports");
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_BOTH);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -80,6 +80,8 @@
         $statement->execute([
             ':id' => $id
         ]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -88,5 +90,7 @@
         $statement->execute([
             ':id' => $id, ':message' => $message
         ]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 ?>
