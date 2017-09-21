@@ -9,7 +9,7 @@ import { Message } from './message';
  
 @Injectable()
 export class HttpService{
-    PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/dbManager.php';
+    PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/controller.php';
     constructor(private http: Http){ }
 
     getMessages() {
