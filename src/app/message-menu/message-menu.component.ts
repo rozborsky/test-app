@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { NgForm} from '@angular/forms';
 
-import { Message } from '../message';
-import { HttpService } from '../http.service';
+import { Message } from '../models/message';
+import { HttpService } from '../services/http.service';
 
 @Component({
   moduleId: module.id,

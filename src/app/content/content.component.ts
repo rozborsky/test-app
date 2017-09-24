@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Response } from '@angular/http';
-import { HttpService } from '../http.service';
+import { HttpService } from '../services/http.service';
 
-import { Message } from '../message';
+import { Message } from '../models/message';
 import { MessageFormComponent } from '../message-form/message-form.component';
 
 
