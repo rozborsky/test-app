@@ -13,6 +13,13 @@
                 if(!$this->table_exists(TABLE_REPORTS)) {
                     $this->create_table_messages(TABLE_REPORTS);                
                 }
+                if($this->is_empty_table(TABLE_REPORTS)) {
+                    $this->fill_table_reports(TABLE_REPORTS);
+                }
+                if($this->is_empty_table(TABLE_USERS)) {
+                    $this->fill_table_users(TABLE_USERS);
+                }
+                
             } catch (PDOException $e) {
                 echo 'Сервіс недоступний';
             }
@@ -46,17 +53,62 @@
 
         private function create_table_users($table) {
             $this->pdo->exec("CREATE TABLE $table (
-                `id_$table`INT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `id`INT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR(50) NOT NULL,
                 `secound_name` VARCHAR(50) NOT NULL,
                 `login` VARCHAR(50) NOT NULL,
                 `password` VARCHAR(100) NOT NULL,
                 `registered` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id_$table`)
+                PRIMARY KEY (`id`)
                 )
                 COLLATE='utf8_general_ci'
                 ENGINE=InnoDB;");
         }
+
+
+        private function is_empty_table($table) {
+            $statement = $this->pdo->prepare("SELECT 1 from $table LIMIT 1");
+            $statement->execute();     
+             
+            return $statement->rowCount() === 0;
+        }
+        
+
+        private function fill_table_users($table) {
+            $sql = "INSERT INTO $table (name, secound_name, login, password, registered) 
+                VALUES 
+                    ('nameOne', 'secoundNameOne', 'loginOne', 'passwordOne', '2017-09-01 23:32:29'),
+                    ('nameTwo', 'secoundNameTwo', 'loginTwo', 'passwordTwo', '2017-09-02 23:32:29')";
+            try {
+                $result = $this->pdo->query($sql);
+            } catch (Exception $e) {
+                return false;
+            }
+        }  
+
+        
+        private function fill_table_reports($table) {
+            $sql = "INSERT INTO $table (host, code, message, created) 
+                VALUES 
+                    ('localhost', 1, 'message1', '2017-09-24 23:32:29'),
+                    ('host', 2, 'message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1
+                    message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1
+                    message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1
+                    message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1 message1', '2017-10-24 23:32:29'),
+                    ('localhost', 1, 'message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2
+                    message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2
+                    message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2
+                    message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2message2
+                    message2message2message2message2message2message2message2message2message2message2message2message2message2message2', '2017-11-24 23:32:29'),
+                    ('host', 2, 'message3', '2017-12-24 23:32:29'),
+                    ('localhost', 1, 'message4', '2017-13-24 23:32:29')";
+            try {
+                $result = $this->pdo->query($sql);
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+
 
         function __destruct() {
             $this->pdo = null;
