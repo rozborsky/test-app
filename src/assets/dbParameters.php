@@ -3,5 +3,6 @@
     const DATABASE = 'test';
     const USER = 'admin';
     const PASSWORD = 'password';
-    const TABLENAME = 'reports';
+    const TABLE_REPORTS = 'reports';
+    const TABLE_USERS = 'users';
 ?>

@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Response } from '@angular/http';
-import { HttpService } from '../services/http.service';
+import { MessageService } from '../services/message.service';
 
 import { Message } from '../models/message';
 import { MessageFormComponent } from '../message-form/message-form.component';
@@ -12,18 +12,18 @@ import { MessageFormComponent } from '../message-form/message-form.component';
   selector: 'app-content',
   templateUrl: 'content.component.html',
   styleUrls: ['content.component.css'],
-  providers: [ HttpService ]
+  providers: [ MessageService ]
 })
 export class ContentComponent implements OnInit{
   messages: Message[]=[];
 
-  constructor(private httpService: HttpService){}
+  constructor(private messageService: MessageService){}
   
   ngOnInit() {
     this.getMessages();
   }
   
   getMessages() {
-    this.httpService.getMessages().subscribe((data: Response) => this.messages=data.json());
+    this.messageService.getMessages().subscribe((data: Response) => this.messages=data.json());
   }
 }

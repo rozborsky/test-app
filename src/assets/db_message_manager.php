@@ -1,44 +1,16 @@
 <?php
     include 'dbParameters.php';
-
-    class DbManager {
+    
+    class DbMessageManager {
         private $pdo;
 
         
         function __construct() {
             try {
-                $this->pdo = new PDO('mysql:dbname=test;host='.HOST, USER, PASSWORD);
-                if(!$this->table_exists(TABLENAME)) {
-                    $this->create_table(TABLENAME);                
-                }   
+                $this->pdo = new PDO('mysql:dbname=test;host='.HOST, USER, PASSWORD);                
             } catch (PDOException $e) {
                 echo 'Сервіс недоступний';
             }
-        }
-
-
-        private function table_exists($table) {
-            try {
-                $result = $this->pdo->query("SELECT 1 FROM $table LIMIT 1");
-            } catch (Exception $e) {
-                return false;
-            }
-
-            return $result !== false;
-        }  
-
-
-        private function create_table($table) {
-            $this->pdo->exec("CREATE TABLE $table (
-                `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                `host` VARCHAR(255) NOT NULL,
-                `code` INT(10) UNSIGNED NOT NULL,
-                `message` MEDIUMTEXT NOT NULL,
-                `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id`)
-                )
-                COLLATE='utf8_general_ci'
-                ENGINE=InnoDB;");
         }
 
 
@@ -76,5 +48,7 @@
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
+
+       
     }
 ?>

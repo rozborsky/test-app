@@ -8,8 +8,8 @@ import 'rxjs/add/observable/throw';
 import { Message } from '../models/message';
  
 @Injectable()
-export class HttpService{
-    PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/controller.php';
+export class MessageService{
+    PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/message_controller.php';
     constructor(private http: Http){ }
 
     getMessages() {

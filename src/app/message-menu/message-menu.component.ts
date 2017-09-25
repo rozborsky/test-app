@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input } from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 import { Message } from '../models/message';
-import { HttpService } from '../services/http.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +19,7 @@ export class MessageMenuComponent {
 
   constructor(
     private _eref: ElementRef, 
-    private httpService: HttpService) { }
+    private messageService: MessageService) { }
 
   onClick(event) {
     if (!this._eref.nativeElement.contains(event.target)) {
@@ -36,12 +36,12 @@ export class MessageMenuComponent {
   }
 
   updateMessage(message: Message) {
-    this.httpService.updateMessage(message).subscribe();
+    this.messageService.updateMessage(message).subscribe();
     location.reload();
   }
 
-  deleteMessage(message: Message) {
-    this.httpService.deleteMessage(message.id + "").subscribe();
+  deleteMessage() {
+    this.messageService.deleteMessage(this.message.id + "").subscribe();
     location.reload();
   }
 }
