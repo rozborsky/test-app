@@ -19,7 +19,6 @@
                 if($this->is_empty_table(TABLE_USERS)) {
                     $this->fill_table_users(TABLE_USERS);
                 }
-                
             } catch (PDOException $e) {
                 echo 'Сервіс недоступний';
             }
