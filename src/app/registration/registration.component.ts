@@ -1,38 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../models/user';
-import { UserService } from '../services/user.service';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
-  providers: [ UserService, User ]
+  templateUrl: 'registration.component.html',
+  styleUrls: ['registration.component.css'],
+  providers: [ RegistrationService, User ]
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
   private confirmPassword: string;
   private isIdenticalPasswords: boolean = true;
 
-  constructor(private userService: UserService, private user: User, private router: Router ) { }
+  constructor(private registrationService: RegistrationService, private user: User, private router: Router ) { }
 
-  ngOnInit() {
-  }
 
   addUser(confirmPassword: string) {
-    console.log(confirmPassword)
-    if(this.user.password == confirmPassword){
+    if (this.user.password == confirmPassword) {
       this.isIdenticalPasswords = true;
-      this.userService.addUser(this.user);
+      this.registrationService.addUser(this.user);
     } else {
       confirmPassword = "";
       this.isIdenticalPasswords = false;
     } 
     if (this.isIdenticalPasswords) {
-      this.userService.addUser(this.user).subscribe();
+      this.registrationService.addUser(this.user).subscribe();
       this.router.navigate(['success-registration']); 
     }
   }
+
 
   isPasswordEmpty(): boolean {
     return this.user.password == null;

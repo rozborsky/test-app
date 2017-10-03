@@ -21,12 +21,11 @@ export class MessageService{
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
         return this.http.post(this.PHP_SCRIPT_URL, body, { headers: headers })
-            .map((resp:Response) => resp.json())
             .catch((error:any) => {return Observable.throw(error);}); 
     }
 
     deleteMessage(id: string) {
-        return this.http.delete(this.PHP_SCRIPT_URL +'/' + id).map((res:Response) => res.json());    
+        return this.http.delete(this.PHP_SCRIPT_URL +'/' + id);    
     }
 
     updateMessage(message: Message) {

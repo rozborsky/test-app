@@ -8,13 +8,9 @@ import 'rxjs/add/observable/throw';
 import { User } from '../models/user';
  
 @Injectable()
-export class UserService{
+export class RegistrationService{
     PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/user_controller.php';
     constructor(private http: Http){ }
-
-    getUser() {
-        return this.http.get(this.PHP_SCRIPT_URL);               
-    }
 
     addUser(user: User) {
         const body = JSON.stringify(user);
