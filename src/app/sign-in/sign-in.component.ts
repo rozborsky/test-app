@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
+
 
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
@@ -24,12 +24,11 @@ export class SignInComponent {
   constructor(
     private authenticationService: AuthenticationService, 
     private router: Router,
-    private _cookieService: CookieService,
     private jsonService: JsonService 
   ) { }
 
-  
-  public signIn(){
+
+  private signIn(){
     this.authenticationService.signIn(this.userLogin, this.userPassword).map((data: Response) => {
         this.response = data['_body'];
 
@@ -43,12 +42,10 @@ export class SignInComponent {
     }).subscribe();
   }
 
-
   private setCookie() {
     let userValues: Array<Array<string>> = this.jsonService.parseJson(this.response);
     for (let values of userValues){
-      console.log(values[0] + " - " + values[1]);
-      this._cookieService.put(values[0], values[1]);
+      this.authenticationService.setCookie(values[0], values[1]);
     }
   }
 }

@@ -1,7 +1,14 @@
 <div class="container-fluid blueBar">
   <div class="container">
-    <a routerLink=""  class="pull-right">головна</a>
-    <a routerLink="registration" class="pull-right">реєстрація</a>
-    <a routerLink="signIn" class="pull-right">вхід</a>
+    <div class="container" *ngIf="isLogged(); else elseBlock">
+      <p class="pull-left">{{name}} {{secound_name}}</p>
+      <a (click)="logOut()"  class="pull-right">вихід</a>
+    </div>
+    <ng-template #elseBlock>
+      <div class="pull-right">
+        <a routerLink="registration">реєстрація</a>&nbsp;<span>|</span>&nbsp;
+        <a routerLink="signIn">вхід</a>
+      </div>
+    </ng-template>
   </div>
 </div>

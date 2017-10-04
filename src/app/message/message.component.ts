@@ -8,26 +8,25 @@ import { Message } from '../models/message';
   styleUrls: ['message.component.css']
 })
 export class MessageComponent {
-  
   @Input() message: Message;
-  isCutted: boolean = true;
-  isMenuOpen: boolean = false;
-  text_of_message: string;
+  private isCutted: boolean = true;
+  private isMenuOpen: boolean = false;
+  private text_of_message: string;
 
 
   ngOnInit() {
     this.text_of_message = this.getMesage();
   }
 
-  cutText(): void {
+  private cutText(): void {
     this.isCutted = !this.isCutted; 
   }
 
-  showMenu(): void {
+  private showMenu(): void {
     this.isMenuOpen = true;
   }
 
-  getMesage() {
+  private getMesage() {
     return this.message.message;
   }
 }

@@ -76,8 +76,8 @@
         private function fill_table_users($table) {
             $sql = "INSERT INTO $table (name, secound_name, login, password, registered) 
                 VALUES 
-                    ('nameOne', 'secoundNameOne', 'loginOne', 'passwordOne', '2017-09-01 23:32:29'),
-                    ('nameTwo', 'secoundNameTwo', 'loginTwo', 'passwordTwo', '2017-09-02 23:32:29')";
+                    ('nameOne', 'secoundNameOne', 'loginOne', '$2y$10$Xn9Ije4TshN9VoX3RhSmtu6ysgTqW0pcDolMmuyE2z.AxaIx4x8Eu', '2017-09-01 23:32:29'),
+                    ('nameTwo', 'secoundNameTwo', 'loginTwo', '$2y$10$dd3DRuP.9CEv8qTLrzD2Suf0CEhJ4piYlq4FHyv7U7J/gMglN4weq', '2017-09-02 23:32:29')";
             try {
                 $result = $this->pdo->query($sql);
             } catch (Exception $e) {

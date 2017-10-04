@@ -4,6 +4,10 @@
     padding-top: 10px;
 }
 
-a {
+a, span{
     color: white;
+}
+
+p {
+    color: #e9ebee;
 }
