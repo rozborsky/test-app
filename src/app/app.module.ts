@@ -4,6 +4,7 @@ import { ModalModule } from "ngx-modal";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { CookieModule } from 'ngx-cookie';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -44,7 +45,8 @@ const appRoutes: Routes =[
     ModalModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CookieModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

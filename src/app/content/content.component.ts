@@ -15,7 +15,7 @@ import { MessageFormComponent } from '../message-form/message-form.component';
   providers: [ MessageService ]
 })
 export class ContentComponent implements OnInit{
-  messages: Message[]=[];
+  private messages: Message[]=[];
 
   constructor(private messageService: MessageService){}
   
@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit{
     this.getMessages();
   }
   
-  getMessages() {
+  private getMessages() {
     this.messageService.getMessages().subscribe((data: Response) => this.messages=data.json());
   }
 }
