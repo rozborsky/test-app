@@ -20,12 +20,12 @@ export class MessageFormComponent {
     private _cookieService: CookieService,
     private authenticationService: AuthenticationService
   ) { 
-    this.message.id = 1;
-    this.message.host = "hostFirst";
-    this.message.code = 2222;
+    
   }
   
   private addMessage(message: Message): void {
+    this.message.host = "host";
+    this.message.code = + this.authenticationService.getCookie('id');
     this.messageService.addMessage(this.message).subscribe();
     location.reload();
   }
