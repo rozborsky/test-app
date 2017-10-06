@@ -16,8 +16,8 @@
         }
 
         
-        public function get_user() {
-            $statement = $this->pdo->prepare("SELECT * FROM $this->tablename");
+        public function get_users() {
+            $statement = $this->pdo->prepare("SELECT id, name, secound_name AS secoundName FROM $this->tablename");
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);

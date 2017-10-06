@@ -10,9 +10,10 @@ import { User } from '../models/user';
 @Injectable()
 export class RegistrationService{
     PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/user_controller.php';
+
     constructor(private http: Http){ }
 
-    addUser(user: User) {
+    public addUser(user: User) {
         const body = JSON.stringify(user);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 

@@ -9,29 +9,35 @@ import { Message } from '../models/message';
  
 @Injectable()
 export class MessageService{
-    PHP_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/message_controller.php';
+    PHP_MESSAGE_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/message_controller.php';
+    PHP_USER_SCRIPT_URL: string = 'http://localhost/test/test-Angular-PHP/src/assets/user_controller.php';
+
     constructor(private http: Http){ }
 
-    getMessages() {
-        return this.http.get(this.PHP_SCRIPT_URL);               
+    public getMessages() {
+        return this.http.get(this.PHP_MESSAGE_SCRIPT_URL);               
     }
 
-    addMessage(message: Message) {
+    public addMessage(message: Message) {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
-        return this.http.post(this.PHP_SCRIPT_URL, body, { headers: headers })
+        return this.http.post(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers })
             .catch((error:any) => {return Observable.throw(error);}); 
     }
 
-    deleteMessage(id: string) {
-        return this.http.delete(this.PHP_SCRIPT_URL +'/' + id);    
+    public deleteMessage(id: string) {
+        return this.http.delete(this.PHP_MESSAGE_SCRIPT_URL +'/' + id);    
     }
 
-    updateMessage(message: Message) {
+    public updateMessage(message: Message) {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
-        return this.http.put(this.PHP_SCRIPT_URL, body, { headers: headers } );
+        return this.http.put(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers } );
+    }
+
+    public getUsers() {
+        return this.http.get(this.PHP_USER_SCRIPT_URL);               
     }
 }

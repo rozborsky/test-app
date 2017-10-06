@@ -9,6 +9,7 @@ import { Message } from '../models/message';
 })
 export class MessageComponent {
   @Input() message: Message;
+  @Input() name: string;
   private isCutted: boolean = true;
   private isMenuOpen: boolean = false;
   private text_of_message: string;

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class JsonService {
-    parseJson(gson: string): Array<Array<string>> {
+    
+    public parseJson(gson: string): Array<Array<string>> {
         gson = gson.replace(/[{}]/g, '');
         let userValues =  gson.split(",");
         let result: Array<Array<string>> = [];

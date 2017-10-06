@@ -15,10 +15,13 @@ export class RegistrationComponent {
   private confirmPassword: string;
   private isIdenticalPasswords: boolean = true;
 
-  constructor(private registrationService: RegistrationService, private user: User, private router: Router ) { }
+  constructor(
+    private registrationService: RegistrationService, 
+    private user: User, 
+    private router: Router ) { }
 
 
-  addUser(confirmPassword: string) {
+  addUser(confirmPassword: string): void {
     if (this.user.password == confirmPassword) {
       this.isIdenticalPasswords = true;
       this.registrationService.addUser(this.user);

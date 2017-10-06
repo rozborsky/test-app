@@ -8,7 +8,7 @@
     $dbUserManager = new DbUserManager();
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        echo json_encode($dbUserManager->get_user());
+        echo json_encode($dbUserManager->get_users());
 
     } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = json_decode(file_get_contents('php://input'), true);

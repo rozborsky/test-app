@@ -1,6 +1,9 @@
   <app-message-form></app-message-form>
-  {{ggg}}
+  
+  <div *ngFor="let message of users">
+    {{users.length}}
+  </div>
   <div *ngIf="messages.length == 0">
     на стіні немає жодного запису. Ви можете бути першим
   </div> {{errorMessage}}
-  <app-message *ngFor="let message of messages" [message] = message >
+  <app-message *ngFor="let message of messages" [message] = message [name] = getName(message.code)>

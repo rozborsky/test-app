@@ -15,32 +15,32 @@ import { MessageService } from '../services/message.service';
 })
 export class MessageMenuComponent {
   @Input() message: Message;
-  isMenuOpened: boolean = false;
+  private isMenuOpened: boolean = false;
 
   constructor(
     private _eref: ElementRef, 
     private messageService: MessageService) { }
 
-  onClick(event) {
+  private onClick(event): void {
     if (!this._eref.nativeElement.contains(event.target)) {
         this.hideMenu();
     }
   }
 
-  showMenu() {
+  private showMenu(): void {
     this.isMenuOpened = true;
   }
 
-  hideMenu() {
+  private hideMenu(): void {
     this.isMenuOpened = false;
   }
 
-  updateMessage(message: Message) {
+  private updateMessage(message: Message): void {
     this.messageService.updateMessage(message).subscribe();
     location.reload();
   }
 
-  deleteMessage() {
+  private deleteMessage(): void {
     this.messageService.deleteMessage(this.message.id + "").subscribe();
     location.reload();
   }
