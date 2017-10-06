@@ -4,7 +4,6 @@
     
     class DbUserManager {
         private $pdo;
-        private $tablename = 'users';
 
         
         function __construct() {
@@ -17,7 +16,7 @@
 
         
         public function get_users() {
-            $statement = $this->pdo->prepare("SELECT id, name, secound_name AS secoundName FROM $this->tablename");
+            $statement = $this->pdo->prepare("SELECT id, name, secound_name AS secoundName FROM ".TABLE_USERS);
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +26,7 @@
         public function add_user($name, $secound_name, $login, $password) {
             $passwordManager = new PasswordManager();
             $statement = $this->pdo->prepare(
-                "INSERT INTO $this->tablename (name, secound_name, login, password) 
+                "INSERT INTO ".TABLE_USERS." (name, secound_name, login, password) 
                 VALUES (:name, :secound_name, :login, :password)");
                 $encryptedPassword = $passwordManager->encrypt($password);
             $statement->execute([

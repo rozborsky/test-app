@@ -3,7 +3,6 @@
     
     class DbMessageManager {
         private $pdo;
-        private $tablename = 'reports';
         
         function __construct() {
             try {
@@ -15,7 +14,7 @@
 
 
         public function get_messages() {
-            $statement = $this->pdo->prepare("SELECT * FROM $this->tablename");
+            $statement = $this->pdo->prepare("SELECT * FROM ".TABLE_REPORTS);
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +22,7 @@
 
 
         public function add_message($host, $code, $message) {
-            $statement = $this->pdo->prepare("INSERT INTO $this->tablename (host, code, message) VALUES (:host, :code, :message)");
+            $statement = $this->pdo->prepare("INSERT INTO ".TABLE_REPORTS." (host, code, message) VALUES (:host, :code, :message)");
             $statement->execute([
                 ':host'=> $host, ':code'=> $code, ':message'=> $message
             ]);
@@ -31,7 +30,7 @@
 
 
         public function delete_message($id) {
-            $statement = $this->pdo->prepare("DELETE FROM $this->tablename WHERE id = :id"); 
+            $statement = $this->pdo->prepare("DELETE FROM ".TABLE_REPORTS." WHERE id = :id"); 
             $statement->execute([
                 ':id' => $id
             ]);
@@ -41,7 +40,7 @@
 
 
         public function update_message($id, $message) {
-            $statement = $this->pdo->prepare("UPDATE $this->tablename SET message = :message WHERE id = :id");
+            $statement = $this->pdo->prepare("UPDATE ".TABLE_REPORTS." SET message = :message WHERE id = :id");
             $statement->execute([
                 ':id' => $id, ':message' => $message
             ]);
