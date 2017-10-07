@@ -13,7 +13,7 @@ export class RegistrationService{
 
     constructor(private http: Http){ }
 
-    public addUser(user: User) {
+    public addUser(user: User): Observable<Response> {
         const body = JSON.stringify(user);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 

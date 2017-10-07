@@ -28,7 +28,7 @@ export class SignInComponent {
   ) { }
 
 
-  private signIn(){
+  private signIn(): void{
     this.authenticationService.signIn(this.userLogin, this.userPassword).map((data: Response) => {
         this.response = data['_body'];
 
@@ -42,7 +42,7 @@ export class SignInComponent {
     }).subscribe();
   }
 
-  private setCookie() {
+  private setCookie(): void {
     let userValues: Array<Array<string>> = this.jsonService.parseJson(this.response);
     for (let values of userValues){
       this.authenticationService.setCookie(values[0], values[1]);

@@ -14,11 +14,11 @@ export class MessageService{
 
     constructor(private http: Http){ }
 
-    public getMessages() {
+    public getMessages(): Observable<Response> {
         return this.http.get(this.PHP_MESSAGE_SCRIPT_URL);               
     }
 
-    public addMessage(message: Message) {
+    public addMessage(message: Message): Observable<Response> {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
@@ -26,18 +26,18 @@ export class MessageService{
             .catch((error:any) => {return Observable.throw(error);}); 
     }
 
-    public deleteMessage(id: string) {
+    public deleteMessage(id: string): Observable<Response> {
         return this.http.delete(this.PHP_MESSAGE_SCRIPT_URL +'/' + id);    
     }
 
-    public updateMessage(message: Message) {
+    public updateMessage(message: Message): Observable<Response> {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
         return this.http.put(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers } );
     }
 
-    public getUsers() {
+    public getUsers(): Observable<Response> {
         return this.http.get(this.PHP_USER_SCRIPT_URL);               
     }
 }
