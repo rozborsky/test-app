@@ -6,12 +6,14 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SuccessRegistrationComponent } from './success-registration/success-registration.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorComponent } from './error/error.component';
 
 export const appRoutes: Routes =[
     { path: '', component: ContentComponent },
     { path: 'registration', component: RegistrationComponent },
     { path: 'success-registration', component: SuccessRegistrationComponent },
     { path: 'signIn', component: SignInComponent },
+    { path: 'error', component: ErrorComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
 

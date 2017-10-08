@@ -1,11 +1,11 @@
 import { Http, RequestOptions, Response, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-import { CookieService } from 'ngx-cookie';
 
+import { CookieService } from 'ngx-cookie';
 import { User } from '../models/user';
  
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthenticationService {
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         
         return this.http.post(this.PHP_SCRIPT_URL, JSON.stringify({ login: login, password: password }), { headers: headers })
-            .catch((error:any) => {return Observable.throw(error);});                
+            .catch((error:any) => { return Observable.throw(error); });                
     }
 
 

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Message } from '../models/message';
 import { MessageService } from '../services/message.service';
@@ -19,7 +20,8 @@ export class MessageMenuComponent {
 
   constructor(
     private _eref: ElementRef, 
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private router: Router) { }
 
   private onClick(event): void {
     if (!this._eref.nativeElement.contains(event.target)) {
@@ -36,12 +38,18 @@ export class MessageMenuComponent {
   }
 
   private updateMessage(message: Message): void {
-    this.messageService.updateMessage(message).subscribe();
+    this.messageService.updateMessage(message).subscribe(
+      (error: any) => this.errorHandle());
     location.reload();
   }
 
   private deleteMessage(): void {
-    this.messageService.deleteMessage(this.message.id + "").subscribe();
+    this.messageService.deleteMessage(this.message.id + "").subscribe(
+      (error: any) => this.errorHandle());
     location.reload();
+  }
+
+  private errorHandle() {
+    this.router.navigate(['error']);
   }
 }

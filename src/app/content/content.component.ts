@@ -6,7 +6,7 @@ import { MessageService } from '../services/message.service';
 import { Message } from '../models/message';
 import { MessageFormComponent } from '../message-form/message-form.component';
 import { User } from '../models/user';
-
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +20,7 @@ export class ContentComponent implements OnInit{
   private users: User[]=[];
   private people: Map<string, String> = new Map<string, string>();
 
-  constructor(private messageService: MessageService){}
+  constructor(private messageService: MessageService, private router: Router){}
   
   ngOnInit() {
     this.getMessages();
@@ -28,11 +28,15 @@ export class ContentComponent implements OnInit{
   }
   
   private getMessages(): void {
-    this.messageService.getMessages().subscribe((data: Response) => this.messages=data.json());
+    this.messageService.getMessages().subscribe(
+      (data: Response) => this.messages=data.json(), 
+      (error: any) => this.errorHandle());
   }
 
   private getUsers(): void {
-    this.messageService.getUsers().subscribe((data: Response) => this.users=data.json());
+    this.messageService.getUsers().subscribe(
+      (data: Response) => this.users=data.json(), 
+      (error: any) => this.errorHandle());
   }
 
   private getName(id: number): string {
@@ -41,5 +45,9 @@ export class ContentComponent implements OnInit{
         return user.name + " " + user.secoundName;
       }
     }
+  }
+
+  private errorHandle() {
+    this.router.navigate(['error']);
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { CookieService } from 'ngx-cookie';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 import { Message } from '../models/message';
 
@@ -18,7 +19,8 @@ export class MessageFormComponent {
     private messageService: MessageService, 
     private message: Message, 
     private _cookieService: CookieService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) { 
     
   }
@@ -26,7 +28,8 @@ export class MessageFormComponent {
   private addMessage(message: Message): void {
     this.message.host = "host";
     this.message.code = + this.authenticationService.getCookie('id');
-    this.messageService.addMessage(this.message).subscribe();
+    this.messageService.addMessage(this.message).subscribe(
+      (error: any) => this.errorHandle());
     location.reload();
   }
 
@@ -35,5 +38,9 @@ export class MessageFormComponent {
       return true;
     }
     return false;
+  }
+
+  private errorHandle() {
+    this.router.navigate(['error']);
   }
 }

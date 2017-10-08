@@ -1,10 +1,9 @@
 import { Http, RequestOptions, Response, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-
 import { Message } from '../models/message';
  
 @Injectable()
@@ -15,7 +14,8 @@ export class MessageService{
     constructor(private http: Http){ }
 
     public getMessages(): Observable<Response> {
-        return this.http.get(this.PHP_MESSAGE_SCRIPT_URL);               
+        return this.http.get(this.PHP_MESSAGE_SCRIPT_URL)
+            .catch((error:any) => { return Observable.throw(error); });               
     }
 
     public addMessage(message: Message): Observable<Response> {
@@ -23,21 +23,24 @@ export class MessageService{
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
         return this.http.post(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers })
-            .catch((error:any) => {return Observable.throw(error);}); 
+            .catch((error:any) => { return Observable.throw(error); }); 
     }
 
     public deleteMessage(id: string): Observable<Response> {
-        return this.http.delete(this.PHP_MESSAGE_SCRIPT_URL +'/' + id);    
+        return this.http.delete(this.PHP_MESSAGE_SCRIPT_URL +'/' + id)
+            .catch((error:any) => { return Observable.throw(error); });    
     }
 
     public updateMessage(message: Message): Observable<Response> {
         const body = JSON.stringify(message);
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
-        return this.http.put(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers } );
+        return this.http.put(this.PHP_MESSAGE_SCRIPT_URL, body, { headers: headers })
+            .catch((error:any) => { return Observable.throw(error); });
     }
 
     public getUsers(): Observable<Response> {
-        return this.http.get(this.PHP_USER_SCRIPT_URL);               
+        return this.http.get(this.PHP_USER_SCRIPT_URL)
+            .catch((error:any) => { return Observable.throw(error); });               
     }
 }

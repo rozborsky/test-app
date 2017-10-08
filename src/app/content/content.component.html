@@ -1,5 +1,5 @@
   <app-message-form></app-message-form>
   <div *ngIf="messages.length == 0">
-    на стіні немає жодного запису. Ви можете бути першим
+    <h2 class="text-center">на стіні немає жодного запису. Ви можете бути першим</h2>
   </div> {{errorMessage}}
   <app-message *ngFor="let message of messages" [message] = message [name] = getName(message.code)>

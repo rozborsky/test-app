@@ -18,6 +18,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SuccessRegistrationComponent } from './success-registration/success-registration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     RegistrationComponent,
     SuccessRegistrationComponent,
     PageNotFoundComponent,
-    SignInComponent
+    SignInComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
