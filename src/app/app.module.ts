@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
+import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,13 +19,6 @@ import { SuccessRegistrationComponent } from './success-registration/success-reg
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
-const appRoutes: Routes =[
-  { path: '', component: ContentComponent },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'success-registration', component: SuccessRegistrationComponent },
-  { path: 'signIn', component: SignInComponent },
-  { path: '**', component: PageNotFoundComponent }
-];
 
 @NgModule({
   declarations: [
@@ -45,7 +39,7 @@ const appRoutes: Routes =[
     ModalModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    routing,
     CookieModule.forRoot()
   ],
   providers: [],
