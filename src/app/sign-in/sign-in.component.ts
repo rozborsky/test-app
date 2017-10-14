@@ -31,8 +31,8 @@ export class SignInComponent {
   }
 
   private setValidators(): void {
-    let login = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20])]));
-    let password = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20])]));
+    let login = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20]), Validators.pattern(/^[a-zA-Z0-9]+$/)]));
+    let password = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20]), Validators.pattern(/^[a-zA-Z0-9]+$/)]));
       
     this.signInForm = new FormGroup({
       login: login,
@@ -43,9 +43,9 @@ export class SignInComponent {
   private signIn(): void{
     this.authenticationService.signIn(this.signInForm.value['login'], this.signInForm.value['password']).map((data: Response) => {
         this.response = data['_body'];
-
         if(this.response === '[]') {
-          this.signInForm.setValue({password: ''});
+          this.signInForm.patchValue({password: ''});
+          
           this.isWrongLogin = true;
         } else {
           this.setCookie();
