@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "angular2-autosize": "^1.0.1",
     "core-js": "^2.4.1",
+    "ng2-validation": "^4.2.0",
     "ngx-cookie": "^1.0.0",
     "ngx-modal": "0.0.29",
     "rxjs": "^5.4.1",

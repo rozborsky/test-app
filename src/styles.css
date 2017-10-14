@@ -3,3 +3,18 @@ body{
     padding: 0;
     background: #e9ebee;
 }
+
+.customClass .img-ul-upload {
+    background-color: #3b5998 !important;
+    border-radius: 5px;
+}
+
+.customClass .img-ul-clear {
+    background-color: #96ACD8 !important;
+    border: 1px solid #3b5998;
+    border-radius: 5px;
+}
+
+.customClass .img-ul-drag-box-msg {
+    color: purple !important;
+}

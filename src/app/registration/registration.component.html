@@ -1,97 +1,34 @@
 <div class="row">
-  <form #form="ngForm" (ngSubmit)="addUser(confirmPassword)">
+  <form [formGroup]="registrationForm" (ngSubmit)="addUser(confirmPassword)" novalidate>
     <div class="form-group">
       <label for="login">логін</label>
-      <input 
-        ngControl="login"
-        #login="ngModel"
-        type="text" 
-        class="form-control" 
-        id="login"
-        required
-        minlength="6"
-        [(ngModel)]="user.login"
-        placeholder="мінімум 6 символів" 
-        name="login">
-      <div 
-        class="alert alert-danger" 
-        *ngIf="login.touched && !login.valid">
-        Логін повинен бути не менше 6-и символів
-      </div>
-    </div> 
+      <input id="login" class="form-control" type="text" formControlName="login" placeholder="від 6 до 10 латинських символів або цифр">
+      <form-alert-component [field] = "registrationForm.get('login')"></form-alert-component>
+    </div>
     <div class="form-group">
       <label for="name">ім'я</label>
-      <input 
-        ngControl="name"
-        #name="ngModel"
-        type="text" 
-        class="form-control" 
-        id="name"
-        required
-        minlength="2"
-        [(ngModel)]="user.name" 
-        name="name">
-        <div 
-          class="alert alert-danger" 
-          *ngIf="name.touched && !name.valid">
-          Ім'я повинно бути не менше 2-х символів
-        </div>
+      <input id="name" class="form-control" type="text" formControlName="name">
+      <form-alert-component [field] = "registrationForm.get('name')"></form-alert-component>
     </div>
     <div class="form-group">
-      <label for="name">прізвище</label>
-      <input
-        ngControl="secoundName"
-        #secoundName="ngModel" 
-        type="text" 
-        class="form-control" 
-        id="secoundName"
-        required
-        minlength="2"
-        [(ngModel)]="user.secoundName" 
-        name="secoundName">
-        <div 
-          class="alert alert-danger" 
-          *ngIf="secoundName.touched && !secoundName.valid">
-          Прізвище повинно бути не менше 2-х символів
-        </div>
-    </div>
+      <label for="secoundName">прізвище</label>
+      <input id="secoundName" class="form-control" type="text" formControlName="secoundName">
+      <form-alert-component [field] = "registrationForm.get('secoundName')"></form-alert-component>
+    </div> 
     <div class="form-group">
       <label for="password">пароль</label>
-      <input
-        ngControl="password"
-        #password="ngModel" 
-        type="password" 
-        class="form-control" 
-        id="password"
-        required
-        minlength="6"
-        [(ngModel)]="user.password" 
-        name="password">
-        <div 
-          class="alert alert-danger" 
-          *ngIf="password.touched && !password.valid">
-          пароль повинен бути не коротше 6-и символів
-        </div>
+      <input id="password" class="form-control" type="text" formControlName="password" placeholder="від 6 до 10 латинських символів або цифр">
+      <form-alert-component [field] = "registrationForm.get('password')"></form-alert-component>
     </div>
     <div class="form-group">
       <label for="confirmPassword">повторіть пароль</label>
-      <input 
-        type="password" 
-        class="form-control" 
-        id="confirmPassword"
-        required
-        [(ngModel)]="confirmPassword" 
-        name="confirmPassword">
-        <div 
-          class="alert alert-danger" 
-          *ngIf="!isIdenticalPasswords && !isPasswordEmpty()">
-          паролі не співпадають
-        </div>
+      <input id="confirmPassword" class="form-control" type="text" formControlName="confirmPassword">
+      <form-alert-component [field] = "registrationForm.get('confirmPassword')"></form-alert-component>
     </div>
     <div class="form-group">
       <button 
-        [disabled]="form.invalid"
-        class="btn btn-primary pull-right" 
+        class="btn btn-primary pull-right"
+        [disabled]="!registrationForm.valid" 
         type="sumbit">
         зареєструватися
       </button>

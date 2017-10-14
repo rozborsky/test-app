@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ModalModule } from "ngx-modal";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
@@ -19,6 +19,7 @@ import { SuccessRegistrationComponent } from './success-registration/success-reg
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorComponent } from './error/error.component';
+import { FormAlertComponent } from './form-alert/form-alert.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ErrorComponent } from './error/error.component';
     SuccessRegistrationComponent,
     PageNotFoundComponent,
     SignInComponent,
-    ErrorComponent
+    ErrorComponent,
+    FormAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,9 @@ import { ErrorComponent } from './error/error.component';
     FormsModule,
     HttpModule,
     routing,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
