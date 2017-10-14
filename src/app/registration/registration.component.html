@@ -1,5 +1,5 @@
 <div class="row">
-  <form [formGroup]="registrationForm" (ngSubmit)="addUser(confirmPassword)" novalidate>
+  <form [formGroup]="registrationForm" (ngSubmit)="addUser()" novalidate>
     <div class="form-group">
       <label for="login">логін</label>
       <input id="login" class="form-control" type="text" formControlName="login" placeholder="від 6 до 10 латинських символів або цифр">
@@ -17,12 +17,12 @@
     </div> 
     <div class="form-group">
       <label for="password">пароль</label>
-      <input id="password" class="form-control" type="text" formControlName="password" placeholder="від 6 до 10 латинських символів або цифр">
+      <input id="password" class="form-control" type="password" formControlName="password" placeholder="від 6 до 10 латинських символів або цифр">
       <form-alert-component [field] = "registrationForm.get('password')"></form-alert-component>
     </div>
     <div class="form-group">
       <label for="confirmPassword">повторіть пароль</label>
-      <input id="confirmPassword" class="form-control" type="text" formControlName="confirmPassword">
+      <input id="confirmPassword" class="form-control" type="password" formControlName="confirmPassword">
       <form-alert-component [field] = "registrationForm.get('confirmPassword')"></form-alert-component>
     </div>
     <div class="form-group">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
 
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
@@ -19,21 +20,32 @@ export class SignInComponent {
   private userPassword: string;
   private user: User;
   private response: string;
+  private signInForm: FormGroup;
 
 
   constructor(
     private authenticationService: AuthenticationService, 
     private router: Router,
-    private jsonService: JsonService 
-  ) { }
+    private jsonService: JsonService) {
+      this.setValidators();
+  }
 
+  private setValidators(): void {
+    let login = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20])]));
+    let password = new FormControl('', Validators.compose([ Validators.required, CustomValidators.rangeLength([1, 20])]));
+      
+    this.signInForm = new FormGroup({
+      login: login,
+      password: password
+    });
+  }
 
   private signIn(): void{
-    this.authenticationService.signIn(this.userLogin, this.userPassword).map((data: Response) => {
+    this.authenticationService.signIn(this.signInForm.value['login'], this.signInForm.value['password']).map((data: Response) => {
         this.response = data['_body'];
 
         if(this.response === '[]') {
-          this.userPassword = '';
+          this.signInForm.setValue({password: ''});
           this.isWrongLogin = true;
         } else {
           this.setCookie();

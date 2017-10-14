@@ -43,10 +43,10 @@ export class RegistrationComponent {
     return Validators.compose([ Validators.required, CustomValidators.rangeLength([min, max]), Validators.pattern(pattern)]);
   }
  
-  addUser(confirmPassword: string): void {
-      this.user = this.initUser(this.registrationForm, this.user);
-      this.registrationService.addUser(this.user).subscribe();
-      this.router.navigate(['success-registration']);
+  addUser(): void {
+    this.user = this.initUser(this.registrationForm, this.user);
+    this.registrationService.addUser(this.user).subscribe();
+    this.router.navigate(['success-registration']);
   }
 
   private initUser(registrationForm: FormGroup, user: User): User {
